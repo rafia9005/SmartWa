@@ -1,0 +1,43 @@
+# Ignore node_modules directory
+node_modules/
+
+# Ignore build/dist directory
+dist/
+
+# Ignore environment variables file
+.env
+
+# Ignore npm debug logs
+npm-debug.log
+
+# Ignore IDE/Editor specific files
+.vscode/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# Ignore TypeScript build files
+*.js
+*.map
+!src/**/*.ts
+
+# Ignore OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Ignore package-lock.json (opsional, jika Anda menggunakan yarn)
+package-lock.json
+
+# Ignore yarn.lock (opsional, jika Anda menggunakan npm)
+yarn.lock
+
+# Ignore local session data (jika menggunakan LocalAuth)
+session/
