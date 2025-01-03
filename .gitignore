@@ -7,7 +7,6 @@ tmp/
 dist/
 
 # Ignore environment variables file
-.env
 
 # Ignore npm debug logs
 npm-debug.log
