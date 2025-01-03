@@ -10,6 +10,7 @@ const GeminiHandler = {
       return ctx.reply("Mohon berikan pertanyaan atau perintah!");
     }
     try {
+      ctx.simulateTyping();
       const GeminiUrl = createUrl("gemini");
 
       const requestData = {
@@ -26,8 +27,7 @@ const GeminiHandler = {
 
       const response = await axios.post(GeminiUrl, requestData);
       const geminiResponse = response.data.candidates[0].content.parts[0].text;
-      ctx.simulateTyping();
-      await new Promise((resolve) => setTimeout(resolve, 2000));
+      //await new Promise((resolve) => setTimeout(resolve, 2000));
 
       return ctx.reply(geminiResponse);
     } catch (error) {

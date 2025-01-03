@@ -5,19 +5,18 @@ const AuthorHandler = {
   name: "author",
   code: async (ctx: Ctx) => {
     const vcard = new VCardBuilder()
-    .setFullName("Ahmad Rafi")
-    .setOrg("Tuxedo Labs")
-    .setNumber(ENV.AUTHOR)
-    .build()
+      .setFullName("Ahmad Rafi")
+      .setOrg("Tuxedo Labs")
+      .setNumber(ENV.AUTHOR)
+      .build();
 
-    return ctx.reply({
+    return ctx.sendMessage(ctx.id || "", {
       contacts: {
         displayName: "Ahmad Rafi",
-        contacts:[{vcard}]
+        contacts: [{ vcard }],
       },
-      text: "Author bot contacts"
-    })
-  }
-}
+    });
+  },
+};
 
-module.exports = AuthorHandler
+module.exports = AuthorHandler;

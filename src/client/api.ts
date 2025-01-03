@@ -18,6 +18,9 @@ const APIs: APIs = {
   },
   tiktok: {
     baseURL: "https://api.nexoracle.com/downloader/tiktok-wm?apikey=a56344876f307199b6&url="
+  },
+  texttovoice: {
+    baseURL: "https://api.nexoracle.com/tts/text-to-speech?apikey=a56344876f307199b6&lang=id-ID&text="
   }
 };
 

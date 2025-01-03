@@ -11,7 +11,7 @@ const MenuHandler = {
         { command: "!image", description: "text to image" },
         { command: "!tiktok", description: "Tiktok downlaoder" },
         { command: "!author", description: "Lihat informasi penulis bot." },
-        { command: "!server", description: "Lihat spesifikasi server." },
+        //{ command: "!server", description: "Lihat spesifikasi server." },
       ];
 
       const menuText =
