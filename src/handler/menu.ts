@@ -1,41 +1,38 @@
-import { Ctx, SectionsBuilder } from "@mengkodingan/ckptw";
+import { Ctx } from "@mengkodingan/ckptw";
 
 const MenuHandler = {
   name: "menu",
   code: async (ctx: Ctx) => {
-    let section1 = new SectionsBuilder()
-      .setDisplayText("Click me")
-      .addSection({
-        title: "Title 1",
-        rows: [
-          {
-            header: "Row Header 1",
-            title: "Row Title 1",
-            description: "Row Description 1",
-            id: "Row Id 1",
-          },
-          {
-            header: "Row Header 2",
-            title: "Row Title 2",
-            description: "Row Description 2",
-            id: "Row Id 2",
-          },
-        ],
-      })
-      .addSection({
-        title: "This is title 2",
-        rows: [
-          { title: "Ping", id: "!ping" },
-          { title: "Hello world", id: "hello world" },
-        ],
-      })
-      .build();
+    try {
+      const commands = [
+        { command: "!ping", description: "Cek status bot." },
+        { command: "!stiker", description: "Ubah gambar menjadi stiker." },
+        { command: "!gemini", description: "Tanya AI Gemini." },
+        { command: "!image", description: "text to image" },
+        { command: "!tiktok", description: "Tiktok downlaoder" },
+        { command: "!author", description: "Lihat informasi penulis bot." },
+        { command: "!server", description: "Lihat spesifikasi server." },
+      ];
 
-    return ctx.sendInteractiveMessage(ctx.id!, {
-      body: "this is body",
-      footer: "this is footer",
-      nativeFlowMessage: { buttons: [section1] },
-    });
+      const menuText =
+        `📋 *Daftar Command*\n` +
+        `\n` +
+        `${commands
+          .map(
+            (cmd, index) =>
+              `${index + 1}. *${cmd.command}* - ${cmd.description}`,
+          )
+          .join("\n")}\n` +
+        `\n` +
+        `Gunakan command di atas untuk berinteraksi dengan bot.`;
+
+      return await ctx.sendMessage(ctx.id || "", {
+        text: menuText,
+      });
+    } catch (error) {
+      console.error("Error:", error);
+      return await ctx.reply("Terjadi kesalahan saat memproses permintaan.");
+    }
   },
 };
 

@@ -26,8 +26,8 @@ const GeminiHandler = {
 
       const response = await axios.post(GeminiUrl, requestData);
       const geminiResponse = response.data.candidates[0].content.parts[0].text;
-      const cd = new Cooldown(ctx, 2000); // add this. Cooldown time must be in milliseconds.
-      if (cd.onCooldown) return ctx.reply(`slow down... wait ${cd.timeleft}ms`); // if user has cooldown stop the code by return something.
+      ctx.simulateTyping();
+      await new Promise((resolve) => setTimeout(resolve, 2000));
 
       return ctx.reply(geminiResponse);
     } catch (error) {

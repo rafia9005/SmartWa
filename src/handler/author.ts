@@ -14,7 +14,8 @@ const AuthorHandler = {
       contacts: {
         displayName: "Ahmad Rafi",
         contacts:[{vcard}]
-      }
+      },
+      text: "Author bot contacts"
     })
   }
 }
