@@ -11,7 +11,9 @@ const BioHandler = {
     }
 
     bot.bio(input)
-    return ctx.reply("succes")
+    return ctx.sendMessage(ctx.id || "", {
+      text: "SUCCES"
+    })
   },
 };
 

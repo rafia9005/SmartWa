@@ -1,10 +1,17 @@
-import { Client, CommandHandler, Events } from "@mengkodingan/ckptw";
+import {
+  Client,
+  CommandHandler,
+  Ctx,
+  Events,
+  MessageType,
+} from "@mengkodingan/ckptw";
 import path from "path";
+import { handleChat } from "./bot";
 
 export const bot = new Client({
   prefix: "!",
   printQRInTerminal: true,
-  readIncommingMsg: true,
+  readIncommingMsg: false
 });
 
 const bioTexts = [
@@ -17,21 +24,29 @@ const bioTexts = [
 ];
 
 let currentBioIndex = 0;
+const cmd = new CommandHandler(bot, path.resolve(__dirname, "handler"));
 
 bot.ev.once(Events.ClientReady, (m) => {
   console.log(`ready at ${m.user.id}`);
   updateBio();
+  cmd.load();
+});
+
+bot.hears(MessageType.conversation, async (ctx: Ctx) => {
+  const messageText = ctx.msg?.content || "";
+  if (messageText.startsWith("!")) {
+    return;
+  }
+
+  handleChat(ctx);
 });
 
 function updateBio() {
   const bio = bioTexts[currentBioIndex];
 
-  bot.bio(bio)
+  bot.bio(bio);
   currentBioIndex = (currentBioIndex + 1) % bioTexts.length;
-  setTimeout(updateBio, 5000);
+  setTimeout(updateBio, 10000);
 }
-
-const cmd = new CommandHandler(bot, path.resolve(__dirname, "handler"));
-cmd.load();
 
 bot.launch();
