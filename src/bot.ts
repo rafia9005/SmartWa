@@ -1,4 +1,4 @@
-import { SystemInformations } from "./data";
+import { SystemInformations, SystemInformationsKawaiMegumin } from "./data";
 import { Ctx } from "@mengkodingan/ckptw";
 import { createUrl } from "./client/api";
 import axios from "axios";
@@ -9,7 +9,7 @@ export async function handleChat(ctx: Ctx) {
     role: "user",
     parts: [
       {
-        text: SystemInformations,
+        text: SystemInformationsKawaiMegumin,
       },
     ],
   };

@@ -11,7 +11,7 @@ import { handleChat } from "./bot";
 export const bot = new Client({
   prefix: "!",
   printQRInTerminal: true,
-  readIncommingMsg: false
+  readIncommingMsg: true
 });
 
 const bioTexts = [
