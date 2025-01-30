@@ -1,12 +1,9 @@
 import {
   Client,
   CommandHandler,
-  Ctx,
   Events,
-  MessageType,
 } from "@mengkodingan/ckptw";
 import path from "path";
-import { handleChat } from "./bot";
 
 export const bot = new Client({
   prefix: "!",
@@ -30,15 +27,6 @@ bot.ev.once(Events.ClientReady, (m) => {
   console.log(`ready at ${m.user.id}`);
   updateBio();
   cmd.load();
-});
-
-bot.hears(MessageType.conversation, async (ctx: Ctx) => {
-  const messageText = ctx.msg?.content || "";
-  if (messageText.startsWith("!")) {
-    return;
-  }
-
-  handleChat(ctx);
 });
 
 function updateBio() {
