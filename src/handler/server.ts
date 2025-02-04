@@ -9,9 +9,10 @@ const ServerHandler = {
       const osArch = os.arch();
       const osRelease = os.release();
 
-      const cpuModel = os.cpus()[0].model;
-      const cpuSpeed = os.cpus()[0].speed;
-      const cpuCores = os.cpus().length;
+      const cpus = os.cpus();
+      const cpuModel = cpus[0].model;
+      const cpuSpeed = cpus[0].speed;
+      const cpuCores = cpus.length;
 
       const totalMem = os.totalmem();
       const freeMem = os.freemem();
@@ -42,14 +43,29 @@ const ServerHandler = {
         return uptimeString;
       };
 
+      const formatPercentage = (used: number, total: number) => {
+        return ((used / total) * 100).toFixed(2) + '%';
+      };
+
       const uptime = formatUptime(os.uptime());
+      const usedMemPercentage = formatPercentage(usedMem, totalMem);
+      const freeMemPercentage = formatPercentage(freeMem, totalMem);
 
       const message =
         `📊 *Spesifikasi Server*\n` +
         `\n` +
         `🖥️ *OS*: ${osType} (${osArch} / ${osRelease})\n` +
-        `💻 *CPU*: ${cpuModel} (${cpuCores} core(s) @ ${cpuSpeed} MHz)\n` +
-        `🧠 *Memory*: ${formatMemory(usedMem)} / ${formatMemory(totalMem)} (Used / Total)\n` +
+        `\n` +
+        `💻 *CPU*\n` +
+        `  ├─ *Model*: ${cpuModel}\n` +
+        `  ├─ *Kecepatan*: ${cpuSpeed} MHz\n` +
+        `  └─ *Jumlah Core*: ${cpuCores} core(s)\n` +
+        `\n` +
+        `🧠 *Memory*\n` +
+        `  ├─ *Total*: ${formatMemory(totalMem)}\n` +
+        `  ├─ *Digunakan*: ${formatMemory(usedMem)} (${usedMemPercentage})\n` +
+        `  └─ *Tersedia*: ${formatMemory(freeMem)} (${freeMemPercentage})\n` +
+        `\n` +
         `⏳ *Uptime*: ${uptime}\n`;
 
       return await ctx.reply(message);
@@ -60,4 +76,4 @@ const ServerHandler = {
   },
 };
 
-module.exports = ServerHandler
+module.exports = ServerHandler;
