@@ -52,7 +52,6 @@ const ServerHandler = {
       const freeMemPercentage = formatPercentage(freeMem, totalMem);
 
       const message =
-        `📊 *Spesifikasi Server*\n` +
         `\n` +
         `🖥️ *OS*: ${osType} (${osArch} / ${osRelease})\n` +
         `\n` +
