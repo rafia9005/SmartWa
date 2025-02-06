@@ -12,7 +12,7 @@ const BioHandler = {
 
     bot.bio(input)
     return ctx.sendMessage(ctx.id || "", {
-      text: "SUCCES"
+      text: "berhasil merubah"
     })
   },
 };

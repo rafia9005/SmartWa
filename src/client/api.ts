@@ -14,14 +14,19 @@ const APIs: APIs = {
     baseURL: `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${ENV.GEMINI}`,
   },
   animegen: {
-    baseURL: "https://api.nexoracle.com/ai/anime-gen?apikey=a56344876f307199b6&prompt="
+    baseURL:
+      "https://api.nexoracle.com/ai/anime-gen?apikey=a56344876f307199b6&prompt=",
   },
   tiktok: {
-    baseURL: "https://api.nexoracle.com/downloader/tiktok-wm?apikey=a56344876f307199b6&url="
+    baseURL:
+      "https://api.nexoracle.com/downloader/tiktok-wm?apikey=a56344876f307199b6&url=",
   },
   texttovoice: {
-    baseURL: "https://api.nexoracle.com/tts/text-to-speech?apikey=a56344876f307199b6&lang=id-ID&text="
-  }
+    baseURL:
+      "https://api.nexoracle.com/tts/text-to-speech?apikey=a56344876f307199b6&lang=id-ID&text=",
+  },
+
+  // you can add your api in here
 };
 
 function createUrl(apiName: string): string {
