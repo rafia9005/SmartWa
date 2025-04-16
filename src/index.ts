@@ -3,7 +3,7 @@ import path from "path";
 import fs from "fs";
 
 export const bot = new Client({
-  prefix: ".",
+  prefix: "!",
   printQRInTerminal: true,
   readIncommingMsg: true,
 });
