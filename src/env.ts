@@ -4,5 +4,6 @@ dotenv.config()
 export const ENV = {
   MONSTER_API: process.env.MONSTER_API || "",
   GEMINI: process.env.GEMINI || "",
-  AUTHOR: process.env.AUTHOR || ""
+  AUTHOR: process.env.AUTHOR || "",
+  TIKTOK: "https://tiktok.tuxedolabs.xyz"
 }

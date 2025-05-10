@@ -3,7 +3,7 @@ import { createUrl } from "../client/api";
 import axios from "axios";
 
 const GeminiHandler = {
-  name: "gemini",
+  name: "ai",
   code: async (ctx: Ctx) => {
     const input = ctx.args.join(" ") || null;
     if (!input) {

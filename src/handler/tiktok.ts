@@ -1,10 +1,10 @@
 import { Ctx } from "@mengkodingan/ckptw";
-import { createUrl } from "../client/api";
 import axios from "axios";
+import { randomUUID } from "crypto";
 import fs from "fs";
 import path from "path";
 import { promisify } from "util";
-import { randomUUID } from "crypto";
+import { ENV } from "../env";
 
 const writeFileAsync = promisify(fs.writeFile);
 const unlinkAsync = promisify(fs.unlink);
@@ -21,22 +21,23 @@ const TiktokHandler = {
     try {
       ctx.simulateTyping();
 
-      const tiktokUrl = createUrl("tiktok");
-      const tiktokUrlGet = `${tiktokUrl}${encodeURIComponent(input)}`;
-      const response = await axios.get(tiktokUrlGet);
+      const tiktokUrl = `${ENV.TIKTOK}/tiktok/video?url=${encodeURIComponent(input)}`;
+      const response = await axios.get(tiktokUrl);
 
       if (
         !response.data ||
+        response.data.status !== "success" ||
         !response.data.result ||
-        !response.data.result.url
+        !response.data.result.videoSD
       ) {
         return ctx.reply("Gagal mengunduh video TikTok. Silakan coba lagi.");
       }
 
-      const videoUrl = response.data.result.url;
+      const videoUrl = response.data.result.videoHD;
       const videoResponse = await axios.get(videoUrl, {
         responseType: "arraybuffer",
       });
+
       const videoBuffer = Buffer.from(videoResponse.data, "binary");
       const fileName = `${randomUUID()}.mp4`;
       const outputPath = path.join("./tmp", fileName);
@@ -47,9 +48,8 @@ const TiktokHandler = {
           url: outputPath,
         },
         caption:
-          `Judul: ${response.data.result.title}\n` +
-          `Durasi: ${response.data.result.duration} detik\n` +
-          `Pembuat: ${response.data.result.author.nickname} (@${response.data.result.author.username})`,
+          `Judul: ${response.data.result.desc}\n` +
+          `Pembuat: ${response.data.result.author.nickname} (@${response.data.result.author.nickname})\n`
       });
 
       await unlinkAsync(outputPath);
